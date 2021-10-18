@@ -1,0 +1,16 @@
+sudo docker run -p 1521:1521 -it dockerhelp/docker-oracle-ee-18c bash
+
+sh post_install.sh
+sqlplus
+
+user: sys as sysdba
+pass: oracle
+
+alter session set "_ORACLE_SCRIPT"=true;
+create user juanpa identified by juanpa;
+grant dba to juanpa;
+GRANT execute ON DBMS_LOCK TO juanpa;
+
+exit;
+sqlplus '/ as sysdba'
+CONNECT juanpa;

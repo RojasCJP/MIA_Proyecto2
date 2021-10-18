@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import indexRoutes from "./routes/indexRoutes";
+import consultRoutes from "./routes/consultRoutes";
 
 class Server {
   public app: Application;
@@ -22,6 +23,7 @@ class Server {
 
   routes(): void {
     this.app.use("/", indexRoutes);
+    this.app.use("/consult", consultRoutes);
   }
 
   start(): void {

@@ -1,0 +1,40 @@
+{
+  "departamentos": [
+    {
+      "nombre": "RRHH",
+      "capital_total": 50000.0,
+      "puestos": [
+        {
+          "nombre": "Analista de RRHH",
+          "salario": 23800.0,
+          "categorias": [
+            { "nombre": "Recursos Humanos" },
+            { "nombre": "Tecnico" }
+          ],
+          "requisistos": [
+            {
+              "nombre": "Antecedentes Penales",
+              "formatos": [{ "nombre": "PDF" }, { "nombre": "PNG" }],
+              "tamano": 5,
+              "obligatorio": 1
+            }
+          ]
+        },
+        {
+          "nombre": "Supervisor de RRHH",
+          "salario": 16800.0,
+          "categorias": [{ "nombre": "Recursos Humanos" }],
+          "requisistos": [
+            {
+              "nombre": "RENAS",
+              "formatos": [{ "nombre": "PDF" }],
+              "tamano": 10,
+              "obligatorio": 1
+            }
+          ]
+        }
+      ],
+      "departamentos": [{ "nombre": "string" }]
+    }
+  ]
+}

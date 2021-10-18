@@ -1,28 +1,28 @@
 import oracledb from "oracledb";
 import keys from "./keys";
 
-async function runTest() {
-  let conn;
+class Connection {
+  async connect(consulta: string) {
+    console.log(consulta);
+    let conn;
 
-  try {
-    conn = await oracledb.getConnection(keys.database);
+    try {
+      conn = await oracledb.getConnection(keys.database);
+      let result = await conn.execute(
+        consulta,
+        [], // no binds
+        {
+          outFormat: oracledb.OUT_FORMAT_OBJECT,
+          autoCommit: true,
+        }
+      );
 
-    const result = await conn.execute("select * from usuario;");
-
-    console.log(result);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    if (conn) {
-      try {
-        await conn.close();
-      } catch (err) {
-        console.error(err);
-      }
+      return { status: 200, data: result.rows };
+    } catch (error) {
+      console.log(error);
+      return { status: 400, message: error };
     }
   }
-  return conn;
 }
 
-const connection = runTest();
-export default connection;
+export const connection = new Connection();

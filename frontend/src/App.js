@@ -7,23 +7,23 @@ import { Guest } from './components/guest';
 import { Revisor } from './components/revisor';
 import { Login } from './components/login';
 import { Datos } from './components/datos';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-
+import history from './history/history';
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <Navbar></Navbar>
         <Switch>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/administrador" component={Administrador}/>
-          <Route exact path="/aplicante" component={Aplicante}/>
-          <Route exact path="/coordinador" component={Coordinador}/>
-          <Route exact path="/guest" component={Guest}/>
-          <Route exact path="/revisor" component={Revisor}/>
-          <Route exact path='/datos' component={Datos}/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/administrador" component={Administrador} />
+          <Route exact path="/aplicante" component={Aplicante} />
+          <Route exact path="/coordinador" component={Coordinador} />
+          <Route exact path="/guest" component={Guest} />
+          <Route exact path="/revisor" component={Revisor} />
+          <Route exact path='/datos' component={Datos} />
         </Switch>
       </Router>
     </div>

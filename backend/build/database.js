@@ -12,31 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.connection = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const keys_1 = __importDefault(require("./keys"));
-function runTest() {
-    return __awaiter(this, void 0, void 0, function* () {
-        let conn;
-        try {
-            conn = yield oracledb_1.default.getConnection(keys_1.default.database);
-            const result = yield conn.execute("select * from usuario;");
-            console.log(result);
-        }
-        catch (err) {
-            console.error(err);
-        }
-        finally {
-            if (conn) {
-                try {
-                    yield conn.close();
-                }
-                catch (err) {
-                    console.error(err);
-                }
+class Connection {
+    connect(consulta) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(consulta);
+            let conn;
+            try {
+                conn = yield oracledb_1.default.getConnection(keys_1.default.database);
+                let result = yield conn.execute(consulta, [], // no binds
+                {
+                    outFormat: oracledb_1.default.OUT_FORMAT_OBJECT,
+                    autoCommit: true,
+                });
+                return { status: 200, data: result.rows };
             }
-        }
-        return conn;
-    });
+            catch (error) {
+                console.log(error);
+                return { status: 400, message: error };
+            }
+        });
+    }
 }
-const connection = runTest();
-exports.default = connection;
+exports.connection = new Connection();

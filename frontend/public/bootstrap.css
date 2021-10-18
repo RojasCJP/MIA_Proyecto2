@@ -2192,7 +2192,7 @@
    font-weight: 400;
    line-height: 1.5;
    color: #212529;
-   background-color: #060606;
+   background-color: #F6F6F6;
    background-clip: padding-box;
    border: 0 solid #fff;
    -webkit-appearance: none;
@@ -2218,7 +2218,7 @@
  
  .form-control:focus {
    color: #212529;
-   background-color: #060606;
+   background-color: #F6F6F6;
    border-color: #95cfeb;
    outline: 0;
    box-shadow: 0 0 0 0.25rem rgba(42, 159, 214, 0.25);
