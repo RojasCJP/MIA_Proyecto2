@@ -6,3 +6,4 @@ drop table Mensaje;
 drop table Chat;
 drop table Usuario;
 drop table TipoUsuario;
+drop table Aplicante;

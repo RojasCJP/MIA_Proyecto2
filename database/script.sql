@@ -46,16 +46,91 @@ create table Aplicante(
     direccion varchar(100)
 );
 
+create table Formato(
+    id_formato int not null primary key,
+    nombre varchar(15)
+);
+create sequence id_formato start with 1;
+
+create table Requisito(
+    id_requisito int not null primary key,
+    nombre varchar(50),
+    tamano int,
+    obligatorio int
+);
+create sequence id_requisito start with 1;
+
+create table RequisitoFormato(
+    id_requisito_formato int not null primary key,
+    id_requisito int not null,
+    id_formato int not null,
+    constraint tk_requisito foreign key (id_requisito) references Requisito(id_requisito),
+    constraint tk_formato foreign key (id_formato) references Formato(id_formato)
+);
+create sequence id_requisito_formato start with 1;
+
+create table Categoria(
+    id_categoria int not null primary key,
+    nombre varchar(50)
+);
+create sequence id_categoria start with 1;
+
+create table Puesto(
+    id_puesto int not null primary key,
+    nombre varchar(50),
+    salario float
+);
+create sequence id_puesto start with 1;
+
+create table PuestoCategoria(
+    id_puesto_categoria int not null primary key,
+    id_puesto int not null,
+    id_categoria int not null,
+    constraint tk_puesto foreign key (id_puesto) references Puesto(id_puesto),
+    constraint tk_categoria foreign key (id_categoria) references Categoria(id_categoria)
+);
+create sequence id_puesto_categoria start with 1;
+
+create table PuestoRequisito(
+    id_puesto_requisito int not null primary key,
+    id_puesto int not null,
+    id_requisito int not null,
+    constraint tk_puestopr foreign key (id_puesto) references Puesto(id_puesto),
+    constraint tk_requisitopr foreign key (id_requisito) references Requisito(id_requisito)
+);
+create sequence id_puesto_requisito start with 1;
+
+create table Departamento(
+    id_departamento int not null primary key,
+    nombre varchar(20),
+    capital_total float, 
+    sub_departamento int,
+    constraint tk_sub_departamento foreign key (sub_departamento) references Departamento(id_departamento)
+);
+create sequence id_departamento start with 1;
+
+create table DepartamentoPuesto(
+    id_departamento_puesto int not null primary key,
+    id_departamento int not null,
+    id_puesto int not null,
+    constraint tk_departamentodp foreign key (id_departamento) references Departamento(id_departamento),
+    constraint tk_puestodp foreign key (id_puesto) references Puesto(id_puesto)
+);
+create sequence id_departamento_puesto start with 1;
+
 insert into tipousuario values (id_tipousuario.nextval, 'administrador');
 insert into tipousuario values (id_tipousuario.nextval, 'aplicante');
 insert into tipousuario values (id_tipousuario.nextval, 'coordinador');
 insert into tipousuario values (id_tipousuario.nextval, 'guest');
 insert into tipousuario values (id_tipousuario.nextval, 'revisor');
 
-insert into usuario values (id_usuario.nextval, 'admin', 'admin', 1);
+insert into usuario values (id_usuario.nextval, 'admin', 'admin',CURRENT_DATE,CURRENT_DATE,'T',1);
 insert into usuario values (id_usuario.nextval, 'aplicante', 'aplicante', 2);
 insert into usuario values (id_usuario.nextval, 'coordinador', 'coordinador', 3);
 insert into usuario values (id_usuario.nextval, 'guest', 'guest', 4);
 insert into usuario values (id_usuario.nextval, 'revisor', 'revisor', 5);
 
 insert into aplicante values (1234, 'juan', 'rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31');
+
+
+-- TODO tengo que hacer las claves primarias compuestas porque falta en algunas tablas

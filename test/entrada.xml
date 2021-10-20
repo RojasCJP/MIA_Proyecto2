@@ -1,0 +1,54 @@
+<departamentos>
+    <departamento>
+        <nombre>RRHH</nombre>
+        <capital_total>50000.00</capital_total>
+        <puestos>
+            <puesto>
+                <nombre>Analista de RRHH</nombre>
+                <salario>23800.00</salario>
+                <categorias>
+                    <categoria>
+                        <nombre>Recursos Humanos</nombre>
+                        <nombre>Tecnico</nombre>
+                    <categoria>
+                </categorias>
+                <requisitos>
+                    <requisito>
+                        <nombre>Antecedentes Penales</nombre>
+                        <formatos>
+                            <formato>
+                                <nombre>PDF</nombre>
+                                <nombre>PNG</nombre>
+                            </formato>
+                        </formatos>
+                        <tamano>5</tamano>
+                        <obligatorio>1</obligatorio>
+                    </requisito>
+                </requisitos>
+            </puesto>
+
+            <puesto>
+                <nombre>Supervisor de RRHH</nombre>
+                <salario>16800.00</salario>
+                <categorias>
+                    <categoria>
+                        <nombre>Recursos Humanos</nombre>
+                    <categoria>
+                </categorias>
+                <requisitos>
+                    <requisito>
+                        <nombre>RENAS</nombre>
+                        <formatos>
+                            <formato>
+                                <nombre>PDF</nombre>
+                            </formato>
+                        </formatos>
+                        <tamano>10</tamano>
+                        <obligatorio>1</obligatorio>
+                    </requisito>
+                </requisitos>
+            </puesto>
+        </puestos>
+        <departamentos></departamentos>
+    </departamento>
+</departamentos>
