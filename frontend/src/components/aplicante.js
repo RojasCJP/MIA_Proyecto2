@@ -6,7 +6,8 @@ export class Aplicante extends React.Component {
         nombre: '',
         apellido: '',
         correo: '',
-        direccion: ''
+        direccion: '',
+        cv: ''
     };
     render() {
         return (
@@ -55,7 +56,14 @@ export class Aplicante extends React.Component {
                                 <input type='text' className="form-control" value={this.state.direccion} onChange={(e) => { this.setState({ direccion: e.target.value }); }}></input>
                             </div>
                         </div><br /><br />
-
+                        <div className='row'>
+                            <div className='col'>
+                                <p>CV:</p>
+                            </div>
+                            <div className='col-9'>
+                                <input type='text' className="form-control" value={this.state.cv} onChange={(e) => { this.setState({ cv: e.target.value }); }}></input>
+                            </div>
+                        </div><br /><br />
                         <br />
                         <button type="button" className="btn btn-success" onClick={() => this.sendAplicante()}>
                             Enviar

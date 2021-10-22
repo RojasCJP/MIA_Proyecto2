@@ -23,10 +23,11 @@ export class Revisor extends React.Component {
                                 <h4 className='col'>Apellido</h4><p className='col'>{element.APELLIDO}</p>
                                 <h4 className='col'>Correo</h4><p className='col'>{element.CORREO}</p>
                                 <h4 className='col'>Direccion</h4><p className='col'>{element.DIRECCION}</p>
+                                <h4 className='col'>CV</h4><button type='button' className='btn btn-primary'>Ver CV</button>
                                 <br />
                                 <div>
-                                    <button type='button' className='btn btn-success'>Aceptar</button>
-                                    <button type='button' className='btn btn-danger'>Rechazar</button>
+                                    <button type='button' className='btn btn-success col-6'>Aceptar</button>
+                                    <button type='button' className='btn btn-danger col-6'>Rechazar</button>
                                 </div>
                                 <br />
                             </div>

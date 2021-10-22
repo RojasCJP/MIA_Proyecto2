@@ -105,6 +105,8 @@ create table Departamento(
     nombre varchar(20),
     capital_total float, 
     sub_departamento int,
+    coordinador int,
+    constraint tk_coordinadordep foreign key (coordinador) references Usuario(id_usuario),
     constraint tk_sub_departamento foreign key (sub_departamento) references Departamento(id_departamento)
 );
 create sequence id_departamento start with 1;
@@ -118,6 +120,16 @@ create table DepartamentoPuesto(
 );
 create sequence id_departamento_puesto start with 1;
 
+create table DepartamentoUsuario(
+    id_departamento_usuario int not null primary key,
+    id_usuario int,
+    id_departamento int,
+    revisor varchar(1),
+    constraint usuario_depa foreign key (id_usuario) references Usuario(id_usuario),
+    constraint depa_usuario foreign key (id_departamento) references Departamento(id_departamento)  
+);
+
+
 insert into tipousuario values (id_tipousuario.nextval, 'administrador');
 insert into tipousuario values (id_tipousuario.nextval, 'aplicante');
 insert into tipousuario values (id_tipousuario.nextval, 'coordinador');
@@ -125,10 +137,6 @@ insert into tipousuario values (id_tipousuario.nextval, 'guest');
 insert into tipousuario values (id_tipousuario.nextval, 'revisor');
 
 insert into usuario values (id_usuario.nextval, 'admin', 'admin',CURRENT_DATE,CURRENT_DATE,'T',1);
-insert into usuario values (id_usuario.nextval, 'aplicante', 'aplicante', 2);
-insert into usuario values (id_usuario.nextval, 'coordinador', 'coordinador', 3);
-insert into usuario values (id_usuario.nextval, 'guest', 'guest', 4);
-insert into usuario values (id_usuario.nextval, 'revisor', 'revisor', 5);
 
 insert into aplicante values (1234, 'juan', 'rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31');
 
