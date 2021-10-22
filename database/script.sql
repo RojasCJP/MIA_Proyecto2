@@ -6,7 +6,7 @@ create sequence id_tipousuario start with 1;
 
 create table Usuario(
     id_usuario int not null primary key,
-    username varchar(15),
+    username varchar(40),
     password varchar(15),
     inicio date,
     final date,
