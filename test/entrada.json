@@ -1,40 +1,105 @@
 {
-  "departamentos": [
-    {
-      "nombre": "RRHH",
-      "capital_total": 50000.0,
-      "puestos": [
-        {
-          "nombre": "Analista de RRHH",
-          "salario": 23800.0,
-          "categorias": [
-            { "nombre": "Recursos Humanos" },
-            { "nombre": "Tecnico" }
-          ],
-          "requisistos": [
-            {
-              "nombre": "Antecedentes Penales",
-              "formatos": [{ "nombre": "PDF" }, { "nombre": "PNG" }],
-              "tamano": 5,
-              "obligatorio": 1
+  "departamentos": {
+    "departamento": {
+      "nombre": {
+        "_text": "RRHH"
+      },
+      "capital_total": {
+        "_text": "50000.00"
+      },
+      "puestos": {
+        "puesto": [
+          {
+            "nombre": {
+              "_text": "Analista de RRHH"
+            },
+            "salario": {
+              "_text": "23800.00"
+            },
+            "categorias": {
+              "categoria": [
+                {
+                  "nombre": {
+                    "_text": "Recursos Humanos"
+                  }
+                },
+                {
+                  "nombre": {
+                    "_text": "Tecnico"
+                  }
+                }
+              ]
+            },
+            "requisitos": {
+              "requisito": {
+                "nombre": {
+                  "_text": "Antecedentes Penales"
+                },
+                "formatos": {
+                  "formato": [
+                    {
+                      "nombre": {
+                        "_text": "PDF"
+                      }
+                    },
+                    {
+                      "nombre": {
+                        "_text": "PNG"
+                      }
+                    }
+                  ]
+                },
+                "tamano": {
+                  "_text": "5"
+                },
+                "obligatorio": {
+                  "_text": "1"
+                }
+              }
             }
-          ]
-        },
-        {
-          "nombre": "Supervisor de RRHH",
-          "salario": 16800.0,
-          "categorias": [{ "nombre": "Recursos Humanos" }],
-          "requisistos": [
-            {
-              "nombre": "RENAS",
-              "formatos": [{ "nombre": "PDF" }],
-              "tamano": 10,
-              "obligatorio": 1
+          },
+          {
+            "nombre": {
+              "_text": "Supervisor de RRHH"
+            },
+            "salario": {
+              "_text": "16800.00"
+            },
+            "categorias": {
+              "categoria": {
+                "nombre": {
+                  "_text": "Recursos Humanos"
+                }
+              }
+            },
+            "requisitos": {
+              "requisito": {
+                "nombre": {
+                  "_text": "RENAS"
+                },
+                "formatos": {
+                  "formato": {
+                    "nombre": {
+                      "_text": "PDF"
+                    }
+                  }
+                },
+                "tamano": {
+                  "_text": "10"
+                },
+                "obligatorio": {
+                  "_text": "1"
+                }
+              }
             }
-          ]
+          }
+        ]
+      },
+      "departamentos": {
+        "departamento": {
+          "_text": "holabuenas"
         }
-      ],
-      "departamentos": [{ "nombre": "string" }]
+      }
     }
-  ]
+  }
 }

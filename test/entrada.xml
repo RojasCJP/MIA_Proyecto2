@@ -9,8 +9,10 @@
                 <categorias>
                     <categoria>
                         <nombre>Recursos Humanos</nombre>
-                        <nombre>Tecnico</nombre>
+                    </categoria>
                     <categoria>
+                        <nombre>Tecnico</nombre>
+                    </categoria>
                 </categorias>
                 <requisitos>
                     <requisito>
@@ -18,6 +20,8 @@
                         <formatos>
                             <formato>
                                 <nombre>PDF</nombre>
+                            </formato>
+                            <formato>
                                 <nombre>PNG</nombre>
                             </formato>
                         </formatos>
@@ -26,14 +30,13 @@
                     </requisito>
                 </requisitos>
             </puesto>
-
             <puesto>
                 <nombre>Supervisor de RRHH</nombre>
                 <salario>16800.00</salario>
                 <categorias>
                     <categoria>
                         <nombre>Recursos Humanos</nombre>
-                    <categoria>
+                    </categoria>
                 </categorias>
                 <requisitos>
                     <requisito>
@@ -49,6 +52,8 @@
                 </requisitos>
             </puesto>
         </puestos>
-        <departamentos></departamentos>
+        <departamentos>
+            <departamento>holabuenas</departamento>
+        </departamentos>
     </departamento>
 </departamentos>

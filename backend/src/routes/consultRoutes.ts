@@ -13,6 +13,7 @@ class IndexRoutes {
     this.router.get("/allUsers", consultController.allUsers);
     this.router.get("/allAplyers", consultController.allAplyers);
     this.router.post("/sendMail", consultController.sendMail);
+    this.router.post("/cargaMasiva", consultController.cargaMasiva);
   }
 }
 

@@ -1,30 +1,42 @@
-export interface Entrada {
-  departamentos: Departamento[];
+interface Text {
+  _text: string;
 }
-interface Departamento {
-  nombre: string;
-  capital_total: number;
-  puestos: Puesto[];
-  departamentos: Departamento[];
+interface Formato {
+  nombre: Text;
 }
-
-interface Puesto {
-  nombre: string;
-  salario: number;
-  categorias: Categoria[];
-  requisitos: Requisito[];
+interface RequisitoInfo {
+  nombre: Text;
+  formatos: Formato[] | Formato;
+  tamano: Text;
+  obligatorio: Text;
+}
+interface Requisito {
+  requisito: RequisitoInfo;
+}
+interface CategoriaInfo {
+  nombre: Text;
 }
 interface Categoria {
-  nombre: string;
+  categoria: CategoriaInfo;
 }
-
-interface Requisito {
-  nombre: string;
-  formatos: Formato[];
-  tamano: number;
-  obligatorio: number;
+interface PuestoInfo {
+  nombre: Text;
+  salario: Text;
+  categorias: Categoria[] | Categoria;
+  requisitos: Requisito[] | Requisito;
 }
-
-interface Formato {
-  nombre: string;
+interface Puesto {
+  puesto: PuestoInfo;
+}
+interface DepartamentoInfo {
+  nombre: Text;
+  capital_total: Text;
+  puestos: Puesto[] | Puesto;
+  departamentos: Departamento[] | Departamento | null;
+}
+interface Departamento {
+  departamento: DepartamentoInfo;
+}
+export interface Entrada {
+  departamentos: Departamento[] | Departamento;
 }
