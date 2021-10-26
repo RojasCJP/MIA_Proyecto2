@@ -13,6 +13,7 @@ class IndexRoutes {
         this.router.get("/allAplyers", consultsController_1.consultController.allAplyers);
         this.router.post("/sendMail", consultsController_1.consultController.sendMail);
         this.router.post("/cargaMasiva", consultsController_1.consultController.cargaMasiva);
+        this.router.post("/coordinadorDepartamento", consultsController_1.consultController.agregarCoordinador);
     }
 }
 const indexRoutes = new IndexRoutes();

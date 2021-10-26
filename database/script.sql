@@ -47,16 +47,18 @@ create table Aplicante(
 );
 
 create table Formato(
-    id_formato int not null primary key,
-    nombre varchar(15)
+    id_formato int not null unique,
+    nombre varchar(15),
+    primary key (id_formato, nombre)
 );
 create sequence id_formato start with 1;
 
 create table Requisito(
-    id_requisito int not null primary key,
+    id_requisito int not null unique,
     nombre varchar(50),
     tamano int,
-    obligatorio int
+    obligatorio int,
+    primary key (id_requisito, nombre, tamano, obligatorio)
 );
 create sequence id_requisito start with 1;
 
@@ -70,15 +72,17 @@ create table RequisitoFormato(
 create sequence id_requisito_formato start with 1;
 
 create table Categoria(
-    id_categoria int not null primary key,
-    nombre varchar(50)
+    id_categoria int not null unique,
+    nombre varchar(50),
+    primary key (id_categoria, nombre)
 );
 create sequence id_categoria start with 1;
 
 create table Puesto(
-    id_puesto int not null primary key,
+    id_puesto int not null unique,
     nombre varchar(50),
-    salario float
+    salario float,
+    primary key (id_puesto, nombre, salario)
 );
 create sequence id_puesto start with 1;
 
@@ -101,13 +105,14 @@ create table PuestoRequisito(
 create sequence id_puesto_requisito start with 1;
 
 create table Departamento(
-    id_departamento int not null primary key,
+    id_departamento int not null unique,
     nombre varchar(20),
     capital_total float, 
     sub_departamento int,
     coordinador int,
     constraint tk_coordinadordep foreign key (coordinador) references Usuario(id_usuario),
-    constraint tk_sub_departamento foreign key (sub_departamento) references Departamento(id_departamento)
+    constraint tk_sub_departamento foreign key (sub_departamento) references Departamento(id_departamento),
+    primary key (id_departamento,nombre,capital_total)
 );
 create sequence id_departamento start with 1;
 
@@ -138,7 +143,10 @@ insert into tipousuario values (id_tipousuario.nextval, 'revisor');
 
 insert into usuario values (id_usuario.nextval, 'admin', 'admin',CURRENT_DATE,CURRENT_DATE,'T',1);
 
-insert into aplicante values (1234, 'juan', 'rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31');
+insert into aplicante values (3004731760101, 'Juan', 'Rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31');
+insert into aplicante values (3004731760102, 'Pablo', 'Chinchilla', 'rojaschjuanpablo@gmail.com', 'tu corazon');
 
 
--- TODO tengo que hacer las claves primarias compuestas porque falta en algunas tablas
+-- insert into departamento (id_departamento, nombre, capital_total) values (id_departamento.nextval, 'Prueba', 5000);
+-- TODO tengo que arreglar las llaves primarias para que jalen con nombres y no numeros
+-- TODO tengo que arreglar las llaves foraneas para que jalen los nombres

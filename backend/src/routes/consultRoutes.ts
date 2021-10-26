@@ -14,6 +14,10 @@ class IndexRoutes {
     this.router.get("/allAplyers", consultController.allAplyers);
     this.router.post("/sendMail", consultController.sendMail);
     this.router.post("/cargaMasiva", consultController.cargaMasiva);
+    this.router.post(
+      "/coordinadorDepartamento",
+      consultController.agregarCoordinador
+    );
   }
 }
 

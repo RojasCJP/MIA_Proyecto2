@@ -49,10 +49,10 @@ class ConsultController {
   }
 
   async meterDatos(json: any, controller: ConsultController) {
-    if (json.departamentos[0] != undefined) {
-      for (let i = 0; i < json.departamentos.length; i++) {
+    if (json.departamentos.departamento[0] != undefined) {
+      for (let i = 0; i < json.departamentos.departamento.length; i++) {
         controller.leerDepartamento(
-          json.departamentos[i].departamento,
+          json.departamentos.departamento[i],
           controller
         );
       }
@@ -63,24 +63,81 @@ class ConsultController {
 
   async leerDepartamento(entrada: any, controller: ConsultController) {
     //TODO aqui tengo que pasarle el puesto o puestos
-    console.log(entrada);
-    controller.leerPuesto(entrada, controller);
-    console.log("departamento");
+    const nombre = entrada.nombre._text;
+    const capital = entrada.capital_total._text;
+    if (entrada.puestos.puesto[0] != undefined) {
+      for (let i = 0; i < entrada.puestos.puesto.length; i++) {
+        controller.leerPuesto(entrada.puestos.puesto[i], controller);
+      }
+    } else {
+      controller.leerPuesto(entrada.puestos.puesto, controller);
+    }
+    const consulta =
+      "insert into departamento (id_departamento, nombre, capital_total) values (id_departamento.nextval, '" +
+      nombre +
+      "', " +
+      capital +
+      ")";
+    var response = await connection.connect(consulta);
+    console.log(response);
   }
   async leerPuesto(entrada: any, controller: ConsultController) {
-    controller.leerCategoria(entrada, controller);
-    controller.leerRequisito(entrada, controller);
-    console.log("puesto");
+    const nombre = entrada.nombre._text;
+    const salario = entrada.salario._text;
+    if (entrada.categorias.categoria[0] != undefined) {
+      for (let i = 0; i < entrada.categorias.categoria.length; i++) {
+        controller.leerCategoria(entrada.categorias.categoria[i], controller);
+      }
+    } else {
+      controller.leerCategoria(entrada.categorias.categoria, controller);
+    }
+    if (entrada.requisitos.requisito[0] != undefined) {
+      for (let i = 0; i < entrada.requisitos.requisito.length; i++) {
+        controller.leerRequisito(entrada.requisitos.requisito[i], controller);
+      }
+    } else {
+      controller.leerRequisito(entrada.requisitos.requisito, controller);
+    }
+    const consulta =
+      "insert into puesto values (id_puesto.nextval, '" +
+      nombre +
+      "', " +
+      salario +
+      ")";
+    await connection.connect(consulta);
   }
   async leerCategoria(entrada: any, controller: ConsultController) {
-    console.log("categoria");
+    const nombre = entrada.nombre._text;
+    const consulta =
+      "insert into categoria values (id_categoria.nextval, '" + nombre + "')";
+    await connection.connect(consulta);
   }
   async leerRequisito(entrada: any, controller: ConsultController) {
-    controller.leerFormato(entrada, controller);
-    console.log("requisito");
+    const nombre = entrada.nombre._text;
+    const tamano = entrada.tamano._text;
+    const obligatorio = entrada.obligatorio._text;
+    if (entrada.formatos.formato[0] != undefined) {
+      for (let i = 0; i < entrada.formatos.formato.length; i++) {
+        controller.leerFormato(entrada.formatos.formato[i], controller);
+      }
+    } else {
+      controller.leerFormato(entrada.formatos.formato, controller);
+    }
+    const consulta =
+      "insert into requisito values (id_requisito.nextval,'" +
+      nombre +
+      "'," +
+      tamano +
+      "," +
+      obligatorio +
+      ")";
+    await connection.connect(consulta);
   }
   async leerFormato(entrada: any, controller: ConsultController) {
-    console.log("formato");
+    const nombre = entrada.nombre._text;
+    const consulta =
+      "insert into formato values (id_formato.nextval, '" + nombre + "')";
+    await connection.connect(consulta);
   }
 
   async conexionRequisitoFormato() {
@@ -97,6 +154,22 @@ class ConsultController {
   }
   async conexionDepartamentoPuesto() {
     console.log("este tengo que pasarle lo de la categoria");
+  }
+
+  // TODO tengo que hacer las conexiones pero falta cambiar unas cosas en el script
+
+  async agregarCoordinador(req: Request, res: Response) {
+    const usuario = req.body.user;
+    const pass = req.body.password;
+    console.log(req.body);
+    const consulta =
+      "insert into usuario values (id_usuario.nextval, '" +
+      usuario +
+      "', '" +
+      pass +
+      "',CURRENT_DATE,CURRENT_DATE,'T',3)";
+    var response = await connection.connect(consulta);
+    res.json({ text: response });
   }
 }
 

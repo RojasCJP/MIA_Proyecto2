@@ -62,9 +62,9 @@ class ConsultController {
     }
     meterDatos(json, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (json.departamentos[0] != undefined) {
-                for (let i = 0; i < json.departamentos.length; i++) {
-                    controller.leerDepartamento(json.departamentos[i].departamento, controller);
+            if (json.departamentos.departamento[0] != undefined) {
+                for (let i = 0; i < json.departamentos.departamento.length; i++) {
+                    controller.leerDepartamento(json.departamentos.departamento[i], controller);
                 }
             }
             else {
@@ -75,32 +75,88 @@ class ConsultController {
     leerDepartamento(entrada, controller) {
         return __awaiter(this, void 0, void 0, function* () {
             //TODO aqui tengo que pasarle el puesto o puestos
-            console.log(entrada);
-            controller.leerPuesto(entrada, controller);
-            console.log("departamento");
+            const nombre = entrada.nombre._text;
+            const capital = entrada.capital_total._text;
+            if (entrada.puestos.puesto[0] != undefined) {
+                for (let i = 0; i < entrada.puestos.puesto.length; i++) {
+                    controller.leerPuesto(entrada.puestos.puesto[i], controller);
+                }
+            }
+            else {
+                controller.leerPuesto(entrada.puestos.puesto, controller);
+            }
+            const consulta = "insert into departamento (id_departamento, nombre, capital_total) values (id_departamento.nextval, '" +
+                nombre +
+                "', " +
+                capital +
+                ")";
+            var response = yield database_1.connection.connect(consulta);
+            console.log(response);
         });
     }
     leerPuesto(entrada, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            controller.leerCategoria(entrada, controller);
-            controller.leerRequisito(entrada, controller);
-            console.log("puesto");
+            const nombre = entrada.nombre._text;
+            const salario = entrada.salario._text;
+            if (entrada.categorias.categoria[0] != undefined) {
+                for (let i = 0; i < entrada.categorias.categoria.length; i++) {
+                    controller.leerCategoria(entrada.categorias.categoria[i], controller);
+                }
+            }
+            else {
+                controller.leerCategoria(entrada.categorias.categoria, controller);
+            }
+            if (entrada.requisitos.requisito[0] != undefined) {
+                for (let i = 0; i < entrada.requisitos.requisito.length; i++) {
+                    controller.leerRequisito(entrada.requisitos.requisito[i], controller);
+                }
+            }
+            else {
+                controller.leerRequisito(entrada.requisitos.requisito, controller);
+            }
+            const consulta = "insert into puesto values (id_puesto.nextval, '" +
+                nombre +
+                "', " +
+                salario +
+                ")";
+            yield database_1.connection.connect(consulta);
         });
     }
     leerCategoria(entrada, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("categoria");
+            const nombre = entrada.nombre._text;
+            const consulta = "insert into categoria values (id_categoria.nextval, '" + nombre + "')";
+            yield database_1.connection.connect(consulta);
         });
     }
     leerRequisito(entrada, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            controller.leerFormato(entrada, controller);
-            console.log("requisito");
+            const nombre = entrada.nombre._text;
+            const tamano = entrada.tamano._text;
+            const obligatorio = entrada.obligatorio._text;
+            if (entrada.formatos.formato[0] != undefined) {
+                for (let i = 0; i < entrada.formatos.formato.length; i++) {
+                    controller.leerFormato(entrada.formatos.formato[i], controller);
+                }
+            }
+            else {
+                controller.leerFormato(entrada.formatos.formato, controller);
+            }
+            const consulta = "insert into requisito values (id_requisito.nextval,'" +
+                nombre +
+                "'," +
+                tamano +
+                "," +
+                obligatorio +
+                ")";
+            yield database_1.connection.connect(consulta);
         });
     }
     leerFormato(entrada, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("formato");
+            const nombre = entrada.nombre._text;
+            const consulta = "insert into formato values (id_formato.nextval, '" + nombre + "')";
+            yield database_1.connection.connect(consulta);
         });
     }
     conexionRequisitoFormato() {
@@ -122,6 +178,21 @@ class ConsultController {
     conexionDepartamentoPuesto() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("este tengo que pasarle lo de la categoria");
+        });
+    }
+    // TODO tengo que hacer las conexiones pero falta cambiar unas cosas en el script
+    agregarCoordinador(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuario = req.body.user;
+            const pass = req.body.password;
+            console.log(req.body);
+            const consulta = "insert into usuario values (id_usuario.nextval, '" +
+                usuario +
+                "', '" +
+                pass +
+                "',CURRENT_DATE,CURRENT_DATE,'T',3)";
+            var response = yield database_1.connection.connect(consulta);
+            res.json({ text: response });
         });
     }
 }
