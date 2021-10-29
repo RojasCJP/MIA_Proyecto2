@@ -45,7 +45,7 @@ export class Mail {
     var mailOptions = {
       from: "proyectoarchivos37@gmail.com",
       to: this.correo,
-      subject: "prueba de correo",
+      subject: "credenciales",
       text: mensaje,
     };
     await this.transporter.sendMail(mailOptions, (error: any, info: any) => {
@@ -56,5 +56,28 @@ export class Mail {
       }
     });
     return contra;
+  }
+
+  async sendMesage() {
+    var mensaje =
+      "ha ingresado un nuevo aplicante con nombre: " +
+      this.nombre +
+      "\napellido: " +
+      this.apellido +
+      "\ncorreo: " +
+      this.correo;
+    var mailOptions = {
+      from: "proyectoarchivos37@gmail.com",
+      to: "jprojaschinchilla@gmail.com",
+      subject: "nuevo aplicante",
+      text: mensaje,
+    };
+    await this.transporter.sendMail(mailOptions, (error: any, info: any) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("email enviado: ", info.response);
+      }
+    });
   }
 }

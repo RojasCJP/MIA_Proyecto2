@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { connection } from "../database";
+import { Mail } from "../mailer/config";
 
 interface Result {
   status: number;
@@ -59,8 +60,17 @@ class IndexController {
       direccion +
       "')";
     var res1 = await connection.connect(insert);
+    var mail = new Mail(nombre, apellido, correo);
+    mail.sendMesage();
     console.log(res1);
     res.json({ status: res1.status });
+  }
+
+  public async puestos(req: Request, res: Response) {
+    var consulta =
+      "select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto";
+    var consultaAplyers = await connection.connect(consulta);
+    res.json(consultaAplyers);
   }
 }
 

@@ -49,7 +49,7 @@ class Mail {
             var mailOptions = {
                 from: "proyectoarchivos37@gmail.com",
                 to: this.correo,
-                subject: "prueba de correo",
+                subject: "credenciales",
                 text: mensaje,
             };
             yield this.transporter.sendMail(mailOptions, (error, info) => {
@@ -61,6 +61,30 @@ class Mail {
                 }
             });
             return contra;
+        });
+    }
+    sendMesage() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var mensaje = "ha ingresado un nuevo aplicante con nombre: " +
+                this.nombre +
+                "\napellido: " +
+                this.apellido +
+                "\ncorreo: " +
+                this.correo;
+            var mailOptions = {
+                from: "proyectoarchivos37@gmail.com",
+                to: "jprojaschinchilla@gmail.com",
+                subject: "nuevo aplicante",
+                text: mensaje,
+            };
+            yield this.transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log("email enviado: ", info.response);
+                }
+            });
         });
     }
 }

@@ -1,3 +1,4 @@
+drop sequence id_departamento_padre_hijo;
 drop sequence id_departamento_usuario;
 drop sequence id_departamento_puesto;
 drop sequence id_departamento;
@@ -13,6 +14,7 @@ drop sequence id_chat;
 drop sequence id_usuario;
 drop sequence id_tipousuario;
 
+drop table DepartamentoPadreHijo;
 drop table DepartamentoUsuario;
 drop table DepartamentoPuesto;
 drop table Departamento;

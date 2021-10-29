@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.indexController = void 0;
 const database_1 = require("../database");
+const config_1 = require("../mailer/config");
 class IndexController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -63,8 +64,17 @@ class IndexController {
                 direccion +
                 "')";
             var res1 = yield database_1.connection.connect(insert);
+            var mail = new config_1.Mail(nombre, apellido, correo);
+            mail.sendMesage();
             console.log(res1);
             res.json({ status: res1.status });
+        });
+    }
+    puestos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consulta = "select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto";
+            var consultaAplyers = yield database_1.connection.connect(consulta);
+            res.json(consultaAplyers);
         });
     }
 }
