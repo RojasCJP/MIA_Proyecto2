@@ -1,3 +1,4 @@
+drop sequence id_departamento_usuario;
 drop sequence id_departamento_puesto;
 drop sequence id_departamento;
 drop sequence id_puesto_requisito;

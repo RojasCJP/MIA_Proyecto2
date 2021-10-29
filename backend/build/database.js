@@ -18,7 +18,6 @@ const keys_1 = __importDefault(require("./keys"));
 class Connection {
     connect(consulta) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(consulta);
             let conn;
             try {
                 conn = yield oracledb_1.default.getConnection(keys_1.default.database);

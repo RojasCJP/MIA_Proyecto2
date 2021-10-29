@@ -153,10 +153,13 @@ export class Administrador extends React.Component {
             }
         });
     }
+
+    // TODO tengo que anadir el coordinador segun el departamento
     agregarCoordinador() {
         var coordinadorConsult = {
             "user": this.state.usuarioCoordinador,
-            "password": this.state.passCoordinador
+            "password": this.state.passCoordinador,
+            "dep": this.state.depCoordinador
         };
         const requestOptions = {
             method: "POST",

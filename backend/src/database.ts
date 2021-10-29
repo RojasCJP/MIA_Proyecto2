@@ -3,7 +3,6 @@ import keys from "./keys";
 
 class Connection {
   async connect(consulta: string) {
-    console.log(consulta);
     let conn;
 
     try {
