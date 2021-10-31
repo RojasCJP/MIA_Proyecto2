@@ -80,7 +80,8 @@ export class Aplicante extends React.Component {
             "nombre": this.state.nombre,
             "apellido": this.state.apellido,
             'correo': this.state.correo,
-            'direccion': this.state.direccion
+            'direccion': this.state.direccion,
+            'cv': this.state.cv
         };
         const requestOptions = {
             method: 'POST',

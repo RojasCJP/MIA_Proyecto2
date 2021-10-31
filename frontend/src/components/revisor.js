@@ -23,7 +23,7 @@ export class Revisor extends React.Component {
                                 <h4 className='col'>Apellido</h4><p className='col'>{element.APELLIDO}</p>
                                 <h4 className='col'>Correo</h4><p className='col'>{element.CORREO}</p>
                                 <h4 className='col'>Direccion</h4><p className='col'>{element.DIRECCION}</p>
-                                <h4 className='col'>CV</h4><button type='button' className='btn btn-primary'>Ver CV</button>
+                                <h4 className='col'>CV</h4><button type='button' className='btn btn-primary' onClick={() => this.redirectCV(element.CV)}>Ver CV</button>
                                 <br />
                                 <div>
                                     <button type='button' className='btn btn-success col-6' onClick={() => this.acceptUser(element.NOMBRE, element.APELLIDO, element.CORREO)}>Aceptar</button>
@@ -76,5 +76,10 @@ export class Revisor extends React.Component {
                 alert("no se pudo ingresar el aplicante");
             }
         });
+    }
+
+    redirectCV(link) {
+        const win = window.open(link);
+        win.focus();
     }
 }

@@ -13,6 +13,7 @@ class IndexRoutes {
     this.router.post("/user", indexController.user);
     this.router.post("/nuevoAplicante", indexController.nuevoAplicante);
     this.router.get("/puestos", indexController.puestos);
+    this.router.get("/allUsers", indexController.allUsers);
   }
 }
 

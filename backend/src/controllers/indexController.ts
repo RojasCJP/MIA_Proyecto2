@@ -47,6 +47,7 @@ class IndexController {
     var apellido = req.body.apellido;
     var correo = req.body.correo;
     var direccion = req.body.direccion;
+    var cv = req.body.cv;
     const insert =
       "insert into aplicante values (" +
       cui +
@@ -58,6 +59,8 @@ class IndexController {
       correo +
       "', '" +
       direccion +
+      "', '" +
+      cv +
       "')";
     var res1 = await connection.connect(insert);
     var mail = new Mail(nombre, apellido, correo);
@@ -71,6 +74,12 @@ class IndexController {
       "select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto";
     var consultaAplyers = await connection.connect(consulta);
     res.json(consultaAplyers);
+  }
+
+  public async allUsers(req: Request, res: Response) {
+    var consulta = "select * from usuario";
+    var consultUsers = await connection.connect(consulta);
+    res.json(consultUsers);
   }
 }
 

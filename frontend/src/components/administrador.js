@@ -6,7 +6,10 @@ export class Administrador extends React.Component {
         masiva: '',
         usuarioCoordinador: '',
         passCoordinador: '',
-        depCoordinador: ''
+        depCoordinador: '',
+        usuarioRevisor: '',
+        passRevisor: '',
+        depRevisor: ''
     };
 
     render() {
@@ -69,7 +72,7 @@ export class Administrador extends React.Component {
                                 <p>Departamento:</p>
                             </div>
                             <div className='col-9'>
-                                <input type='text' className="form-control"></input>
+                                <input type='text' className="form-control" value={this.state.depRevisor} onChange={(e) => { this.setState({ depRevisor: e.target.value }); }}></input>
                             </div>
                         </div><br /><br />
                         <div className='row'>
@@ -77,7 +80,7 @@ export class Administrador extends React.Component {
                                 <p>Username:</p>
                             </div>
                             <div className='col-9'>
-                                <input type='text' className="form-control" ></input>
+                                <input type='text' className="form-control" value={this.state.usuarioRevisor} onChange={(e) => { this.setState({ usuarioRevisor: e.target.value }); }}></input>
                             </div>
                         </div><br /><br />
                         <div className='row'>
@@ -85,14 +88,14 @@ export class Administrador extends React.Component {
                                 <p>Contrasena:</p>
                             </div>
                             <div className='col-9'>
-                                <input type='text' className="form-control" ></input>
+                                <input type='text' className="form-control" value={this.state.passRevisor} onChange={(e) => { this.setState({ passRevisor: e.target.value }); }}></input>
                             </div>
                         </div><br /><br />
                     </div>
                     <br />
                     <div>
                         <button type='button' className='btn btn-primary btn-outline-light col-4'>Edit</button>
-                        <button type='button' className='btn btn-success btn-outline-light col-4'>Create</button>
+                        <button type='button' className='btn btn-success btn-outline-light col-4' onClick={() => this.agregarRevisor()}>Create</button>
                         <button type='button' className='btn btn-danger btn-outline-light col-4'>Delete</button>
                     </div>
                 </div>
@@ -154,7 +157,6 @@ export class Administrador extends React.Component {
         });
     }
 
-    // TODO tengo que anadir el coordinador segun el departamento
     agregarCoordinador() {
         var coordinadorConsult = {
             "user": this.state.usuarioCoordinador,
@@ -168,6 +170,24 @@ export class Administrador extends React.Component {
         };
         console.log(coordinadorConsult);
         fetch('http://localhost:4000/consult/coordinadorDepartamento', requestOptions).then(async response => {
+            const json = await response.json();
+            console.log(json);
+        });
+    }
+
+    agregarRevisor() {
+        var revisorConsult = {
+            "user": this.state.usuarioRevisor,
+            "password": this.state.passRevisor,
+            "dep": this.state.depRevisor
+        };
+        const requestOptions = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(revisorConsult)
+        };
+        console.log(revisorConsult);
+        fetch('http://localhost:4000/consult/revisorDepartamento', requestOptions).then(async response => {
             const json = await response.json();
             console.log(json);
         });

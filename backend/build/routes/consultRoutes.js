@@ -14,6 +14,7 @@ class IndexRoutes {
         this.router.post("/sendMail", consultsController_1.consultController.sendMail);
         this.router.post("/cargaMasiva", consultsController_1.consultController.cargaMasiva);
         this.router.post("/coordinadorDepartamento", consultsController_1.consultController.agregarCoordinador);
+        this.router.post("/revisorDepartamento", consultsController_1.consultController.agregarRevisor);
     }
 }
 const indexRoutes = new IndexRoutes();

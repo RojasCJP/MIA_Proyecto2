@@ -45,7 +45,8 @@ create table Aplicante(
     nombre varchar(150),
     apellido varchar(150),
     correo varchar(150),
-    direccion varchar(150)
+    direccion varchar(150),
+    cv varchar(150)
 );
 
 create table Formato(
@@ -155,8 +156,8 @@ insert into tipousuario values (id_tipousuario.nextval, 'revisor');
 
 insert into usuario values (id_usuario.nextval, 'admin', 'admin',CURRENT_DATE,CURRENT_DATE,'T',1) ;
 
-insert into aplicante values (3004731760101, 'Juan', 'Rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31');
-insert into aplicante values (3004731760102, 'Pablo', 'Chinchilla', 'rojaschjuanpablo@gmail.com', 'tu corazon');
+insert into aplicante values (3004731760101, 'Juan', 'Rojas', 'jprojaschinchilla@gmail.com', '33 av A 20-31', 'https://lorempixel.com/1920/1080/');
+insert into aplicante values (3004731760102, 'Pablo', 'Chinchilla', 'rojaschjuanpablo@gmail.com', 'tu corazon','https://lorempixel.com/1920/1080/');
 
 select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto
 inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento

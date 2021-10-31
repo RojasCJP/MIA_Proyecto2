@@ -7,6 +7,7 @@ import { Guest } from './components/guest';
 import { Revisor } from './components/revisor';
 import { Login } from './components/login';
 import { Datos } from './components/datos';
+import { Usuarios } from './components/usuarios';
 import { Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import history from './history/history';
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/aplicante" component={Aplicante} />
           <Route exact path="/coordinador" component={Coordinador} />
           <Route exact path="/guest" component={Guest} />
+          <Route exact path="/usuarios" component={Usuarios} />
           <Route exact path="/revisor" component={Revisor} />
           <Route exact path='/datos' component={Datos} />
         </Switch>

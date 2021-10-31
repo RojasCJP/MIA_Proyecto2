@@ -18,6 +18,7 @@ class IndexRoutes {
       "/coordinadorDepartamento",
       consultController.agregarCoordinador
     );
+    this.router.post("/revisorDepartamento", consultController.agregarRevisor);
   }
 }
 

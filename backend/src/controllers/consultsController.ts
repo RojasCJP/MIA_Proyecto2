@@ -32,7 +32,7 @@ class ConsultController {
       req.body.apellido +
       "', '" +
       contra +
-      "',CURRENT_DATE,CURRENT_DATE,'T',1)";
+      "',CURRENT_DATE,CURRENT_DATE,'T',2)";
     var consulta = await connection.connect(insert);
     console.log(consulta);
     res.json(consulta);
@@ -97,11 +97,19 @@ class ConsultController {
             entrada.departamentos.departamento[i],
             controller
           );
+          await controller.conexionDepartamentoPadreHijo(
+            entrada.nombre._text,
+            entrada.departamentos.departamento[i].nombre._text
+          );
         }
       } else if (entrada.departamentos.departamento != undefined) {
         await controller.leerDepartamento(
           entrada.departamentos.departamento,
           controller
+        );
+        await controller.conexionDepartamentoPadreHijo(
+          entrada.nombre._text,
+          entrada.departamentos.departamento.nombre._text
         );
       }
     }
@@ -269,7 +277,21 @@ class ConsultController {
     }
   }
 
-  // TODO tengo que hacer las conexiones pero falta cambiar unas cosas en el script
+  async conexionDepartamentoPadreHijo(padre: string, hijo: string) {
+    var consulta1 = "select * from departamento where nombre = '" + padre + "'";
+    var consulta2 = "select * from departamento where nombre = '" + hijo + "'";
+    var respuesta1: any = await connection.connect(consulta1);
+    var respuesta2: any = await connection.connect(consulta2);
+    if (respuesta1.data != undefined && respuesta2.data != undefined) {
+      var insert1 =
+        "insert into departamentopadrehijo values (id_departamento_padre_hijo.nextval, " +
+        respuesta1.data[0].ID_DEPARTAMENTO +
+        "," +
+        respuesta2.data[0].ID_DEPARTAMENTO +
+        ")";
+      await connection.connect(insert1);
+    }
+  }
 
   async agregarCoordinador(req: Request, res: Response) {
     const usuario = req.body.user;
@@ -317,6 +339,45 @@ class ConsultController {
 
   async modificarCoordinador(req: Request, res: Response) {}
   async eliminarCoordinador(req: Request, res: Response) {}
+
+  async agregarRevisor(req: Request, res: Response) {
+    const usuario = req.body.user;
+    const pass = req.body.password;
+    const dep = req.body.dep;
+    const consultaDepartamento =
+      "select * from departamento where nombre = '" + dep + "'";
+    const resDep: any = await connection.connect(consultaDepartamento);
+    console.log(resDep.data.length);
+    if (resDep.data.length == 0) {
+      console.log("no hay departamento");
+      res.json({ text: "error el departamento no existe" });
+      return;
+    }
+    const consulta =
+      "insert into usuario values (id_usuario.nextval, '" +
+      usuario +
+      "', '" +
+      pass +
+      "',CURRENT_DATE,CURRENT_DATE,'T',5)";
+    const getIdUser =
+      "select id_usuario from usuario where username = '" +
+      usuario +
+      "' and password = '" +
+      pass +
+      "'";
+    await connection.connect(consulta);
+    var IdUser: any = await connection.connect(getIdUser);
+    var asignarUsuario =
+      "insert into departamentousuario values (id_departamento_usuario.nextval, " +
+      IdUser.data[0].ID_USUARIO +
+      "," +
+      resDep.data[0].ID_DEPARTAMENTO +
+      ",'T')";
+    await connection.connect(asignarUsuario);
+    res.json({ text: "todo bien" });
+  }
+  async modificarRevisor() {}
+  async eliminarRevisor() {}
 }
 
 export const consultController = new ConsultController();
