@@ -36,6 +36,14 @@ class ConsultController {
             res.json(consultaAplyers);
         });
     }
+    deleteAplyer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var cui = req.body.cui;
+            var deleteAplyer = "delete from aplicante where cui = " + cui;
+            yield database_1.connection.connect(deleteAplyer);
+            res.json({ text: "eliminar aplicante" });
+        });
+    }
     sendMail(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var mail = new config_1.Mail(req.body.nombre, req.body.apellido, req.body.correo);

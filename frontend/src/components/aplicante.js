@@ -68,6 +68,9 @@ export class Aplicante extends React.Component {
                         <button type="button" className="btn btn-success" onClick={() => this.sendAplicante()}>
                             Enviar
                         </button>
+                        <button type="button" className="btn btn-primary" onClick={() => this.updateAplicante()}>
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>
@@ -94,6 +97,30 @@ export class Aplicante extends React.Component {
                 alert("aplicante agregado exitosamente");
             } else {
                 alert("no se pudo ingresar el aplicante");
+            }
+        });
+    }
+
+    updateAplicante() {
+        var aplicanteConsult = {
+            "cui": this.state.cui,
+            "nombre": this.state.nombre,
+            "apellido": this.state.apellido,
+            'correo': this.state.correo,
+            'direccion': this.state.direccion,
+            'cv': this.state.cv
+        };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(aplicanteConsult)
+        };
+        fetch('http://localhost:4000/updateAplicante', requestOptions).then(async response => {
+            const json = await response.json();
+            if (json.status == 200) {
+                alert("aplicante actualizado exitosamente");
+            } else {
+                alert("no se pudo actualizar el aplicante");
             }
         });
     }

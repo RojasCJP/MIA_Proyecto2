@@ -19,6 +19,7 @@ class IndexRoutes {
       consultController.agregarCoordinador
     );
     this.router.post("/revisorDepartamento", consultController.agregarRevisor);
+    this.router.post("/deleteAplyer", consultController.deleteAplyer);
   }
 }
 

@@ -9,6 +9,7 @@ export class Revisor extends React.Component {
         this.getAllAplyers();
     };
 
+
     render() {
         return (
             <div className='container'>
@@ -27,7 +28,7 @@ export class Revisor extends React.Component {
                                 <br />
                                 <div>
                                     <button type='button' className='btn btn-success col-6' onClick={() => this.acceptUser(element.NOMBRE, element.APELLIDO, element.CORREO)}>Aceptar</button>
-                                    <button type='button' className='btn btn-danger col-6'>Rechazar</button>
+                                    <button type='button' className='btn btn-danger col-6' onClick={() => this.eliminarUser(element.CUI)}>Rechazar</button>
                                 </div>
                                 <br />
                             </div>
@@ -81,5 +82,20 @@ export class Revisor extends React.Component {
     redirectCV(link) {
         const win = window.open(link);
         win.focus();
+    }
+
+    eliminarUser(cui) {
+        var ruta = 'http://localhost:4000/consult/deleteAplyer';
+        var aplicanteConsult = {
+            "cui": cui
+        };
+        fetch(ruta, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(aplicanteConsult)
+        }).then(async response => {
+            const json = await response.json();
+            this.getAllAplyers();
+        });
     }
 }

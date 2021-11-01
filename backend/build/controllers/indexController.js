@@ -73,6 +73,30 @@ class IndexController {
             res.json({ status: res1.status });
         });
     }
+    updateAplicante(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var cui = req.body.cui;
+            var nombre = req.body.nombre;
+            var apellido = req.body.apellido;
+            var correo = req.body.correo;
+            var direccion = req.body.direccion;
+            var cv = req.body.cv;
+            const update = "update aplicante set nombre='" +
+                nombre +
+                "',apellido='" +
+                apellido +
+                "',correo='" +
+                correo +
+                "',direccion='" +
+                direccion +
+                "',cv='" +
+                cv +
+                "' where cui = " +
+                cui;
+            var res1 = yield database_1.connection.connect(update);
+            res.json({ status: res1.status });
+        });
+    }
     puestos(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var consulta = "select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto";

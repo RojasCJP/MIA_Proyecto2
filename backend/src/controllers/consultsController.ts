@@ -23,6 +23,13 @@ class ConsultController {
     res.json(consultaAplyers);
   }
 
+  public async deleteAplyer(req: Request, res: Response) {
+    var cui = req.body.cui;
+    var deleteAplyer: string = "delete from aplicante where cui = " + cui;
+    await connection.connect(deleteAplyer);
+    res.json({ text: "eliminar aplicante" });
+  }
+
   public async sendMail(req: Request, res: Response) {
     var mail = new Mail(req.body.nombre, req.body.apellido, req.body.correo);
     var contra: string = await mail.sendMail();

@@ -15,6 +15,7 @@ class IndexRoutes {
         this.router.post("/cargaMasiva", consultsController_1.consultController.cargaMasiva);
         this.router.post("/coordinadorDepartamento", consultsController_1.consultController.agregarCoordinador);
         this.router.post("/revisorDepartamento", consultsController_1.consultController.agregarRevisor);
+        this.router.post("/deleteAplyer", consultsController_1.consultController.deleteAplyer);
     }
 }
 const indexRoutes = new IndexRoutes();
