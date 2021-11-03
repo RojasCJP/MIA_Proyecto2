@@ -37,6 +37,7 @@ class Mail {
         this.nombre = nombre;
         this.correo = correo;
     }
+    // TODO el usuario tiene que ser el dpi
     sendMail() {
         return __awaiter(this, void 0, void 0, function* () {
             var contra = this.generateRandomString(10);

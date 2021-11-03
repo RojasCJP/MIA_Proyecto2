@@ -32,6 +32,7 @@ export class Mail {
     return result1;
   };
 
+  // TODO el usuario tiene que ser el dpi
   async sendMail() {
     var contra: string = this.generateRandomString(10);
     var mensaje =

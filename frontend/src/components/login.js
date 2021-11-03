@@ -71,10 +71,10 @@ export class Login extends React.Component {
                     history.push('/administrador');
                     break;
                 case 2:
-                    history.push('/aplicante');
+                    history.push('/usuarios');
                     break;
                 case 3:
-                    history.push('/coordinador');
+                    history.push('/departamento');
                     break;
                 case 4:
                     history.push('/guest');

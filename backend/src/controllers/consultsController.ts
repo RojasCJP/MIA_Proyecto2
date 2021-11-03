@@ -344,9 +344,6 @@ class ConsultController {
     res.json({ text: "todo bien" });
   }
 
-  async modificarCoordinador(req: Request, res: Response) {}
-  async eliminarCoordinador(req: Request, res: Response) {}
-
   async agregarRevisor(req: Request, res: Response) {
     const usuario = req.body.user;
     const pass = req.body.password;
@@ -384,7 +381,32 @@ class ConsultController {
     res.json({ text: "todo bien" });
   }
   async modificarRevisor() {}
-  async eliminarRevisor() {}
+
+  async eliminarUsuario(req: Request, res: Response) {
+    var username = req.body.username;
+    const consulta =
+      "update usuario set activo = 'F', final = CURRENT_DATE where username = '" +
+      username +
+      "'";
+    var respuesta = await connection.connect(consulta);
+    res.json(respuesta);
+  }
+
+  async editarUsuario(req: Request, res: Response) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var idUser = req.body.id;
+
+    const consulta =
+      "update usuario set username = '" +
+      username +
+      "', password = '" +
+      password +
+      "' where id_usuario = " +
+      idUser;
+    var respuesta = await connection.connect(consulta);
+    res.json(respuesta);
+  }
 }
 
 export const consultController = new ConsultController();

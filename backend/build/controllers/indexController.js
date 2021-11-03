@@ -111,5 +111,12 @@ class IndexController {
             res.json(consultUsers);
         });
     }
+    allDep(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consulta = "select nombre, capital_total as capital, Usuario.username from departamento left outer join Usuario on Usuario.id_usuario = Departamento.coordinador";
+            var consultDep = yield database_1.connection.connect(consulta);
+            res.json(consultDep);
+        });
+    }
 }
 exports.indexController = new IndexController();

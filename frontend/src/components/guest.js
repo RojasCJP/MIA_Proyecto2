@@ -12,7 +12,14 @@ export class Guest extends React.Component {
     };
     render() {
         return (
-            <div>
+            <div className='container'>
+                <br />
+                <div className='row'>
+                    <div className=" col-11">
+                        <input type='text' className="form-control" ></input>
+                    </div>
+                    <button className='btn btn-success col-1'>Buscar</button>
+                </div>
                 <br />
                 <Carousel>
                     {this.state.puestos.map(element =>

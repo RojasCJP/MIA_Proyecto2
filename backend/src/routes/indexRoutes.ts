@@ -15,6 +15,7 @@ class IndexRoutes {
     this.router.post("/updateAplicante", indexController.updateAplicante);
     this.router.get("/puestos", indexController.puestos);
     this.router.get("/allUsers", indexController.allUsers);
+    this.router.get("/allDep", indexController.allDep);
   }
 }
 

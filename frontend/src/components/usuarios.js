@@ -21,9 +21,12 @@ export class Usuarios extends React.Component {
                                 <h4 className='col'>Username</h4><p className='col'>{element.USERNAME}</p>
                                 <h4 className='col'>Password</h4><p className='col'>{element.PASSWORD}</p>
                                 <h4 className='col'>Tipo Usuario</h4><p className='col'>{element.ID_TIPOUSUARIO}</p>
+                                <h4 className='col'>Activo</h4><p className='col'>{element.ACTIVO}</p>
+                                <h4 className='col'>Inicio</h4><p className='col'>{element.INICIO}</p>
+                                <h4 className='col'>Final</h4><p className='col'>{element.FINAL}</p>
                                 <br />
                                 <div>
-                                    <button type='button' className='btn btn-danger col-6'>Delete user</button>
+                                    <button type='button' className='btn btn-danger col-6' onClick={() => { this.deleteUser(element.USERNAME); }}>Delete user</button>
                                 </div>
                                 <br />
                             </div>
@@ -51,6 +54,21 @@ export class Usuarios extends React.Component {
                 this.setState({ users: json });
             }
 
+        });
+    }
+
+    deleteUser(username) {
+        var ruta = 'http://localhost:4000/consult/deleteUser';
+        var userConsult = {
+            "username": username
+        };
+        fetch(ruta, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userConsult)
+        }).then(async response => {
+            const json = await response.json();
+            this.getAllUsers();
         });
     }
 

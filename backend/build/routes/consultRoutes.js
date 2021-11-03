@@ -16,6 +16,8 @@ class IndexRoutes {
         this.router.post("/coordinadorDepartamento", consultsController_1.consultController.agregarCoordinador);
         this.router.post("/revisorDepartamento", consultsController_1.consultController.agregarRevisor);
         this.router.post("/deleteAplyer", consultsController_1.consultController.deleteAplyer);
+        this.router.post("/deleteUser", consultsController_1.consultController.eliminarUsuario);
+        this.router.post("/editUser", consultsController_1.consultController.editarUsuario);
     }
 }
 const indexRoutes = new IndexRoutes();

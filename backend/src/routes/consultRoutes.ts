@@ -20,6 +20,8 @@ class IndexRoutes {
     );
     this.router.post("/revisorDepartamento", consultController.agregarRevisor);
     this.router.post("/deleteAplyer", consultController.deleteAplyer);
+    this.router.post("/deleteUser", consultController.eliminarUsuario);
+    this.router.post("/editUser", consultController.editarUsuario);
   }
 }
 

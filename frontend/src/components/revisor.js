@@ -15,6 +15,13 @@ export class Revisor extends React.Component {
             <div className='container'>
                 <br />
                 <div className='row'>
+                    <div className=" col-11">
+                        <input type='text' className="form-control" ></input>
+                    </div>
+                    <button className='btn btn-success col-1'>Buscar</button>
+                </div>
+                <br />
+                <div className='row'>
                     {this.state.aplicantes.map(
                         element =>
                             <><div className='card col-3 mt-4 px-2' key={element.num}>

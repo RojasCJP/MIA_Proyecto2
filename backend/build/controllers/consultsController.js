@@ -318,12 +318,6 @@ class ConsultController {
             res.json({ text: "todo bien" });
         });
     }
-    modificarCoordinador(req, res) {
-        return __awaiter(this, void 0, void 0, function* () { });
-    }
-    eliminarCoordinador(req, res) {
-        return __awaiter(this, void 0, void 0, function* () { });
-    }
     agregarRevisor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuario = req.body.user;
@@ -361,8 +355,30 @@ class ConsultController {
     modificarRevisor() {
         return __awaiter(this, void 0, void 0, function* () { });
     }
-    eliminarRevisor() {
-        return __awaiter(this, void 0, void 0, function* () { });
+    eliminarUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var username = req.body.username;
+            const consulta = "update usuario set activo = 'F', final = CURRENT_DATE where username = '" +
+                username +
+                "'";
+            var respuesta = yield database_1.connection.connect(consulta);
+            res.json(respuesta);
+        });
+    }
+    editarUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var username = req.body.username;
+            var password = req.body.password;
+            var idUser = req.body.id;
+            const consulta = "update usuario set username = '" +
+                username +
+                "', password = '" +
+                password +
+                "' where id_usuario = " +
+                idUser;
+            var respuesta = yield database_1.connection.connect(consulta);
+            res.json(respuesta);
+        });
     }
 }
 exports.consultController = new ConsultController();

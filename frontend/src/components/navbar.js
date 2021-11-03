@@ -34,8 +34,8 @@ export class Navbar extends React.Component {
                                     </Link>
                                 </li>
                                 <li class="nav-item active">
-                                    <Link to='/coordinador'>
-                                        <a class="nav-link" >Coordinador</a>
+                                    <Link to='/departamento'>
+                                        <a class="nav-link" >Departamento</a>
                                     </Link>
                                 </li>
                                 <li class="nav-item active">

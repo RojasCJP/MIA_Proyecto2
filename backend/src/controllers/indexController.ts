@@ -105,6 +105,13 @@ class IndexController {
     var consultUsers = await connection.connect(consulta);
     res.json(consultUsers);
   }
+
+  public async allDep(req: Request, res: Response) {
+    var consulta =
+      "select nombre, capital_total as capital, Usuario.username from departamento left outer join Usuario on Usuario.id_usuario = Departamento.coordinador";
+    var consultDep = await connection.connect(consulta);
+    res.json(consultDep);
+  }
 }
 
 export const indexController = new IndexController();
