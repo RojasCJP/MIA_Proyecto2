@@ -1,4 +1,5 @@
 import React from "react";
+import UserProfile from "../history/session";
 
 export class Revisor extends React.Component {
     state = {
@@ -7,6 +8,7 @@ export class Revisor extends React.Component {
 
     componentDidMount = () => {
         this.getAllAplyers();
+        console.log(UserProfile.getDepartment());
     };
 
 
@@ -24,7 +26,7 @@ export class Revisor extends React.Component {
                 <div className='row'>
                     {this.state.aplicantes.map(
                         element =>
-                            <><div className='card col-3 mt-4 px-2' key={element.num}>
+                            <><div className='card col-3 mt-4 px-2' key={element.key}>
                                 <br />
                                 <h4 className='col'>CUI</h4><p className='col'>{element.CUI}</p>
                                 <h4 className='col'>Nombre</h4><p className='col'>{element.NOMBRE}</p>
@@ -57,7 +59,7 @@ export class Revisor extends React.Component {
             const json = jsonInicial.data;
             if (json != null) {
                 json.forEach(element => {
-                    element['num'] = i;
+                    element['key'] = i;
                     i++;
                 });
                 this.setState({ aplicantes: json });
@@ -71,6 +73,7 @@ export class Revisor extends React.Component {
             "nombre": nombre,
             "apellido": apellido,
             'correo': correo,
+            "departament": UserProfile.getDepartment()
         };
         fetch(ruta, {
             method: 'POST',

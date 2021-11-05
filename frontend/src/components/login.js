@@ -1,5 +1,6 @@
 import React from "react";
 import history from "../history/history";
+import UserProfile from "../history/session";
 
 export class Login extends React.Component {
 
@@ -57,7 +58,9 @@ export class Login extends React.Component {
             const json = await response.json();
             this.setState({ entrada: json.entrada });
             this.setState({ tipoUsuario: json.tipo });
-            console.log(this.state);
+            console.log(json);
+            UserProfile.setDepartment(json.departament);
+            console.log(UserProfile.getDepartment());
             this.redirect();
         });
     }

@@ -139,7 +139,7 @@ create sequence id_departamento_puesto start with 1;
 
 create table DepartamentoUsuario(
     id_departamento_usuario int not null primary key,
-    id_usuario int,
+    id_usuario int unique,
     id_departamento int,
     revisor varchar(1),
     constraint usuario_depa foreign key (id_usuario) references Usuario(id_usuario),

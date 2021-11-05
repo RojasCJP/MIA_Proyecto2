@@ -135,6 +135,7 @@ export class Administrador extends React.Component {
                         <button type='button' className='btn btn-success btn-outline-light col-6' onClick={() => this.agregarRevisor()}>Create</button>
                     </div>
                 </div>
+                <br />
                 <div className='card'>
                     <h4>Editar usuarios</h4>
                     <div className='container'>

@@ -32,6 +32,7 @@ class ConsultController {
 
   public async sendMail(req: Request, res: Response) {
     var mail = new Mail(req.body.nombre, req.body.apellido, req.body.correo);
+    var dep = req.body.departament;
     var contra: string = await mail.sendMail();
     var insert: string =
       "insert into usuario values (id_usuario.nextval, '" +
@@ -40,9 +41,25 @@ class ConsultController {
       "', '" +
       contra +
       "',CURRENT_DATE,CURRENT_DATE,'T',2)";
+    var getid: string =
+      "select id_tipousuario as tipo, id_usuario as id from usuario where username = '" +
+      req.body.nombre +
+      req.body.apellido +
+      "' and password = '" +
+      contra +
+      "'";
     var consulta = await connection.connect(insert);
-    console.log(consulta);
-    res.json(consulta);
+    var getId: any = await connection.connect(getid);
+    var insertDep: string =
+      "insert into departamentousuario values (id_departamento_usuario.nextval, " +
+      getId.data[0].ID +
+      "," +
+      dep +
+      ",'F')";
+    var insertDepRes = await connection.connect(insertDep);
+    console.log(dep);
+    console.log(insertDepRes);
+    res.json(insertDepRes);
   }
 
   public async cargaMasiva(req: Request, res: Response) {

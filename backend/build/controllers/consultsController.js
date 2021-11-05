@@ -47,6 +47,7 @@ class ConsultController {
     sendMail(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var mail = new config_1.Mail(req.body.nombre, req.body.apellido, req.body.correo);
+            var dep = req.body.departament;
             var contra = yield mail.sendMail();
             var insert = "insert into usuario values (id_usuario.nextval, '" +
                 req.body.nombre +
@@ -54,9 +55,23 @@ class ConsultController {
                 "', '" +
                 contra +
                 "',CURRENT_DATE,CURRENT_DATE,'T',2)";
+            var getid = "select id_tipousuario as tipo, id_usuario as id from usuario where username = '" +
+                req.body.nombre +
+                req.body.apellido +
+                "' and password = '" +
+                contra +
+                "'";
             var consulta = yield database_1.connection.connect(insert);
-            console.log(consulta);
-            res.json(consulta);
+            var getId = yield database_1.connection.connect(getid);
+            var insertDep = "insert into departamentousuario values (id_departamento_usuario.nextval, " +
+                getId.data[0].ID +
+                "," +
+                dep +
+                ",'F')";
+            var insertDepRes = yield database_1.connection.connect(insertDep);
+            console.log(dep);
+            console.log(insertDepRes);
+            res.json(insertDepRes);
         });
     }
     cargaMasiva(req, res) {

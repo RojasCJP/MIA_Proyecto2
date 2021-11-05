@@ -27,21 +27,43 @@ class IndexController {
                 "' and password = '" +
                 pass +
                 "'";
-            var consulta2 = "select id_tipousuario as tipo from usuario where username = '" +
+            var consulta2 = "select id_tipousuario as tipo, id_usuario as id from usuario where username = '" +
                 username +
                 "' and password = '" +
                 pass +
                 "'";
             var result = yield database_1.connection.connect(consulta1);
             var tipo = yield database_1.connection.connect(consulta2);
+            var consulta3 = "";
+            if (tipo.data.length > 0) {
+                consulta3 =
+                    "select id_departamento as departamento from departamentousuario where id_usuario = " +
+                        tipo.data[0].ID;
+            }
+            var dep = yield database_1.connection.connect(consulta3);
+            var departamentoaux = null;
+            if (dep.data != undefined) {
+                if (dep.data[0] != undefined) {
+                    departamentoaux = dep.data[0].DEPARTAMENTO;
+                }
+            }
+            console.log(departamentoaux);
             if (tipo.data.length == 0) {
                 tipo.data = [{ TIPO: 0 }];
             }
             if (result.data[0].CUENTA == 1) {
-                res.json({ entrada: true, tipo: tipo.data[0].TIPO });
+                res.json({
+                    entrada: true,
+                    tipo: tipo.data[0].TIPO,
+                    departament: departamentoaux,
+                });
             }
             else {
-                res.json({ entrada: false, tipo: tipo.data[0].TIPO });
+                res.json({
+                    entrada: false,
+                    tipo: tipo.data[0].TIPO,
+                    departament: departamentoaux,
+                });
             }
         });
     }
