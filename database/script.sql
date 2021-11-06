@@ -162,6 +162,12 @@ insert into aplicante values (3004731760102, 'Pablo', 'Chinchilla', 'rojaschjuan
 select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto
 inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento
 inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto;
+
+
+select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto
+    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    
+    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto
+    where Puesto.nombre like '%oor%';
 -- insert into departamento (id_departamento, nombre, capital_total) values (id_departamento.nextval, 'Prueba', 5000);
 -- TODO tengo que arreglar las llaves primarias para que jalen con nombres y no numeros
 -- TODO tengo que arreglar las llaves foraneas para que jalen los nombres

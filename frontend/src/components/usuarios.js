@@ -2,7 +2,8 @@ import React from "react";
 
 export class Usuarios extends React.Component {
     state = {
-        users: []
+        users: [],
+        username: ''
     };
 
     componentDidMount = () => {
@@ -12,6 +13,13 @@ export class Usuarios extends React.Component {
     render() {
         return (
             <div className='container'>
+                <br />
+                <div className='row'>
+                    <div className=" col-11">
+                        <input type='text' className="form-control" value={this.state.username} onChange={(e) => { this.setState({ username: e.target.value }); }}></input>
+                    </div>
+                    <button className='btn btn-success col-1' onClick={() => { this.searchUsers(); }}>Buscar</button>
+                </div>
                 <br />
                 <div className='row'>
                     {this.state.users.map(
@@ -55,6 +63,33 @@ export class Usuarios extends React.Component {
             }
 
         });
+    }
+
+    searchUsers() {
+        var nombre = this.state.username;
+        var ruta = 'http://localhost:4000/consult/searchUser';
+        var objeto = { name: nombre };
+        if (nombre != "" && nombre != undefined && nombre != null) {
+
+            fetch(ruta, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(objeto)
+            }).then(async response => {
+                var i = 1;
+                const jsonInicial = await response.json();
+                const json = jsonInicial.data;
+                if (json != null) {
+                    json.forEach(element => {
+                        element['num'] = i;
+                        i++;
+                    });
+                    this.setState({ users: json });
+                }
+            });
+        } else {
+            this.getAllUsers();
+        }
     }
 
     deleteUser(username) {

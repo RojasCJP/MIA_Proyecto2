@@ -3,7 +3,8 @@ import UserProfile from "../history/session";
 
 export class Revisor extends React.Component {
     state = {
-        aplicantes: []
+        aplicantes: [],
+        nombre: ''
     };
 
     componentDidMount = () => {
@@ -18,9 +19,9 @@ export class Revisor extends React.Component {
                 <br />
                 <div className='row'>
                     <div className=" col-11">
-                        <input type='text' className="form-control" ></input>
+                        <input type='text' className="form-control" value={this.state.nombre} onChange={(e) => { this.setState({ nombre: e.target.value }); }}></input>
                     </div>
-                    <button className='btn btn-success col-1'>Buscar</button>
+                    <button className='btn btn-success col-1' onClick={() => { this.getSearchAplyers(); }}>Buscar</button>
                 </div>
                 <br />
                 <div className='row'>
@@ -36,7 +37,7 @@ export class Revisor extends React.Component {
                                 <h4 className='col'>CV</h4><button type='button' className='btn btn-primary' onClick={() => this.redirectCV(element.CV)}>Ver CV</button>
                                 <br />
                                 <div>
-                                    <button type='button' className='btn btn-success col-6' onClick={() => this.acceptUser(element.NOMBRE, element.APELLIDO, element.CORREO)}>Aceptar</button>
+                                    <button type='button' className='btn btn-success col-6' onClick={() => this.acceptUser(element.NOMBRE, element.APELLIDO, element.CORREO, element.CUI)}>Aceptar</button>
                                     <button type='button' className='btn btn-danger col-6' onClick={() => this.eliminarUser(element.CUI)}>Rechazar</button>
                                 </div>
                                 <br />
@@ -67,7 +68,35 @@ export class Revisor extends React.Component {
         });
     }
 
-    acceptUser(nombre, apellido, correo) {
+
+    getSearchAplyers() {
+        var nombre = this.state.nombre;
+        var ruta = 'http://localhost:4000/consult/searchAplyers';
+        var objeto = { name: nombre };
+        if (nombre != "" && nombre != undefined && nombre != null) {
+
+            fetch(ruta, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(objeto)
+            }).then(async response => {
+                var i = 1;
+                const jsonInicial = await response.json();
+                const json = jsonInicial.data;
+                if (json != null) {
+                    json.forEach(element => {
+                        element['key'] = i;
+                        i++;
+                    });
+                    this.setState({ aplicantes: json });
+                }
+            });
+        } else {
+            this.getAllAplyers();
+        }
+    }
+
+    acceptUser(nombre, apellido, correo, cui) {
         var ruta = 'http://localhost:4000/consult/sendMail';
         var aplicanteConsult = {
             "nombre": nombre,
@@ -83,6 +112,7 @@ export class Revisor extends React.Component {
             const json = await response.json();
             if (json.status == 200) {
                 alert("aplicante agregado exitosamente");
+                this.eliminarUser(cui);
             } else {
                 alert("no se pudo ingresar el aplicante");
             }

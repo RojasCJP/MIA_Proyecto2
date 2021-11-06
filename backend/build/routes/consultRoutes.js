@@ -11,6 +11,7 @@ class IndexRoutes {
         this.router.get("/", consultsController_1.consultController.index);
         this.router.get("/allUsers", consultsController_1.consultController.allUsers);
         this.router.get("/allAplyers", consultsController_1.consultController.allAplyers);
+        this.router.post("/searchAplyers", consultsController_1.consultController.searchAplyers);
         this.router.post("/sendMail", consultsController_1.consultController.sendMail);
         this.router.post("/cargaMasiva", consultsController_1.consultController.cargaMasiva);
         this.router.post("/coordinadorDepartamento", consultsController_1.consultController.agregarCoordinador);
@@ -18,6 +19,7 @@ class IndexRoutes {
         this.router.post("/deleteAplyer", consultsController_1.consultController.deleteAplyer);
         this.router.post("/deleteUser", consultsController_1.consultController.eliminarUsuario);
         this.router.post("/editUser", consultsController_1.consultController.editarUsuario);
+        this.router.post("/searchUser", consultsController_1.consultController.searchUser);
     }
 }
 const indexRoutes = new IndexRoutes();

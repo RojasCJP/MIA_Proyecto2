@@ -5,7 +5,8 @@ import history from "../history/history";
 
 export class Guest extends React.Component {
     state = {
-        puestos: []
+        puestos: [],
+        puestoName: ''
     };
     componentDidMount = () => {
         this.getAllPuestos();
@@ -16,9 +17,9 @@ export class Guest extends React.Component {
                 <br />
                 <div className='row'>
                     <div className=" col-11">
-                        <input type='text' className="form-control" ></input>
+                        <input type='text' className="form-control" value={this.state.puestoName} onChange={(e) => { this.setState({ puestoName: e.target.value }); }}></input>
                     </div>
-                    <button className='btn btn-success col-1'>Buscar</button>
+                    <button className='btn btn-success col-1' onClick={() => { this.searchPuestos(); }}>Buscar</button>
                 </div>
                 <br />
                 <Carousel>
@@ -57,5 +58,36 @@ export class Guest extends React.Component {
                 this.setState({ puestos: json });
             }
         });
+    }
+
+    searchPuestos() {
+        console.log("si esta entrando al metodo");
+        var puestoName = this.state.puestoName;
+        var ruta = 'http://localhost:4000/searchPuestos';
+        var consulta = {
+            puesto: puestoName
+        };
+        if (puestoName != '' && puestoName != null && puestoName != undefined) {
+
+            fetch(ruta, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(consulta)
+            }).then(async response => {
+                var i = 1;
+                const jsonInicial = await response.json();
+                const json = jsonInicial.data;
+                if (json != null) {
+                    json.forEach(element => {
+                        element['num'] = i;
+                        i++;
+                    });
+                    this.setState({ puestos: json });
+                }
+            });
+        } else {
+            console.log("entra aqui wtf");
+            this.getAllPuestos();
+        }
     }
 };

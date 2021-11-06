@@ -126,6 +126,18 @@ class IndexController {
             res.json(consultaAplyers);
         });
     }
+    searchPuestos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consulta = `select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto
+    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    
+    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto
+    where Puesto.nombre like '%` +
+                req.body.puesto +
+                `%'`;
+            var consultaPuestos = yield database_1.connection.connect(consulta);
+            res.json(consultaPuestos);
+        });
+    }
     allUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var consulta = "select * from usuario";

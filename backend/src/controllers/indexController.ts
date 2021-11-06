@@ -122,6 +122,18 @@ class IndexController {
     res.json(consultaAplyers);
   }
 
+  public async searchPuestos(req: Request, res: Response) {
+    var consulta =
+      `select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.salario as salario from DepartamentoPuesto
+    inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    
+    inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto
+    where Puesto.nombre like '%` +
+      req.body.puesto +
+      `%'`;
+    var consultaPuestos = await connection.connect(consulta);
+    res.json(consultaPuestos);
+  }
+
   public async allUsers(req: Request, res: Response) {
     var consulta = "select * from usuario";
     var consultUsers = await connection.connect(consulta);

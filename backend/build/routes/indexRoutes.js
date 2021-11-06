@@ -15,6 +15,7 @@ class IndexRoutes {
         this.router.get("/puestos", indexController_1.indexController.puestos);
         this.router.get("/allUsers", indexController_1.indexController.allUsers);
         this.router.get("/allDep", indexController_1.indexController.allDep);
+        this.router.post("/searchPuestos", indexController_1.indexController.searchPuestos);
     }
 }
 const indexRoutes = new IndexRoutes();

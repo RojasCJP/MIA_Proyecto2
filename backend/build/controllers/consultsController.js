@@ -36,6 +36,18 @@ class ConsultController {
             res.json(consultaAplyers);
         });
     }
+    searchAplyers(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consultaAplyers = yield database_1.connection.connect("select * from aplicante where nombre like '%" + req.body.name + "%'");
+            res.json(consultaAplyers);
+        });
+    }
+    searchUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var consultaUsuario = yield database_1.connection.connect("select * from usuario where username like '%" + req.body.name + "%'");
+            res.json(consultaUsuario);
+        });
+    }
     deleteAplyer(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var cui = req.body.cui;

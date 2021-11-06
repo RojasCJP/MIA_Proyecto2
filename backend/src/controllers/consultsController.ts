@@ -23,6 +23,20 @@ class ConsultController {
     res.json(consultaAplyers);
   }
 
+  public async searchAplyers(req: Request, res: Response) {
+    var consultaAplyers = await connection.connect(
+      "select * from aplicante where nombre like '%" + req.body.name + "%'"
+    );
+    res.json(consultaAplyers);
+  }
+
+  public async searchUser(req: Request, res: Response) {
+    var consultaUsuario = await connection.connect(
+      "select * from usuario where username like '%" + req.body.name + "%'"
+    );
+    res.json(consultaUsuario);
+  }
+
   public async deleteAplyer(req: Request, res: Response) {
     var cui = req.body.cui;
     var deleteAplyer: string = "delete from aplicante where cui = " + cui;
