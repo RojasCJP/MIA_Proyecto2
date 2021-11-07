@@ -438,6 +438,19 @@ class ConsultController {
     var respuesta = await connection.connect(consulta);
     res.json(respuesta);
   }
+
+  public async userFromDep(req: Request, res: Response) {
+    var dep = req.body.dep;
+    const consult =
+      `
+    select username,password,inicio,final,activo from usuario
+    inner join DepartamentoUsuario on DepartamentoUsuario.id_usuario = Usuario.id_usuario
+    where DepartamentoUsuario.id_departamento = ` +
+      dep +
+      `;`;
+    var respuesta = await connection.connect(consult);
+    res.json(respuesta);
+  }
 }
 
 export const consultController = new ConsultController();

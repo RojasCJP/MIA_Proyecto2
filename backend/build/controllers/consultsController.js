@@ -407,5 +407,18 @@ class ConsultController {
             res.json(respuesta);
         });
     }
+    userFromDep(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var dep = req.body.dep;
+            const consult = `
+    select username,password,inicio,final,activo from usuario
+    inner join DepartamentoUsuario on DepartamentoUsuario.id_usuario = Usuario.id_usuario
+    where DepartamentoUsuario.id_departamento = ` +
+                dep +
+                `;`;
+            var respuesta = yield database_1.connection.connect(consult);
+            res.json(respuesta);
+        });
+    }
 }
 exports.consultController = new ConsultController();

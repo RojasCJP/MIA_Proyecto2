@@ -20,6 +20,7 @@ class IndexRoutes {
         this.router.post("/deleteUser", consultsController_1.consultController.eliminarUsuario);
         this.router.post("/editUser", consultsController_1.consultController.editarUsuario);
         this.router.post("/searchUser", consultsController_1.consultController.searchUser);
+        this.router.post("/userFromDep", consultsController_1.consultController.userFromDep);
     }
 }
 const indexRoutes = new IndexRoutes();

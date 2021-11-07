@@ -168,6 +168,12 @@ select Puesto.nombre as puesto, Departamento.nombre as departamento, Puesto.sala
     inner join Departamento on Departamento.id_departamento = DepartamentoPuesto.id_departamento    
     inner join Puesto on Puesto.id_puesto = DepartamentoPuesto.id_puesto
     where Puesto.nombre like '%oor%';
+
+describe usuario;
+
+select username,password,inicio,final,activo from usuario
+inner join DepartamentoUsuario on DepartamentoUsuario.id_usuario = Usuario.id_usuario
+where DepartamentoUsuario.id_departamento = 1;
 -- insert into departamento (id_departamento, nombre, capital_total) values (id_departamento.nextval, 'Prueba', 5000);
 -- TODO tengo que arreglar las llaves primarias para que jalen con nombres y no numeros
 -- TODO tengo que arreglar las llaves foraneas para que jalen los nombres

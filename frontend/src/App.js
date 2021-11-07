@@ -8,6 +8,7 @@ import { Revisor } from './components/revisor';
 import { Login } from './components/login';
 import { Datos } from './components/datos';
 import { Usuarios } from './components/usuarios';
+import { Related } from './components/related';
 import { Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import history from './history/history';
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/administrador" component={Administrador} />
           <Route exact path="/aplicante" component={Aplicante} />
           <Route exact path="/departamento" component={Departamento} />
+          <Route exact path="/related/:dep" component={Related} />
           <Route exact path="/guest" component={Guest} />
           <Route exact path="/" component={Guest} />
           <Route exact path="/usuarios" component={Usuarios} />

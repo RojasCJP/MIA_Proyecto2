@@ -24,6 +24,7 @@ class IndexRoutes {
     this.router.post("/deleteUser", consultController.eliminarUsuario);
     this.router.post("/editUser", consultController.editarUsuario);
     this.router.post("/searchUser", consultController.searchUser);
+    this.router.post("/userFromDep", consultController.userFromDep);
   }
 }
 
