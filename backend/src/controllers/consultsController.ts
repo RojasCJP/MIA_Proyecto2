@@ -445,9 +445,7 @@ class ConsultController {
       `
     select username,password,inicio,final,activo from usuario
     inner join DepartamentoUsuario on DepartamentoUsuario.id_usuario = Usuario.id_usuario
-    where DepartamentoUsuario.id_departamento = ` +
-      dep +
-      `;`;
+    where DepartamentoUsuario.id_departamento = ` + dep;
     var respuesta = await connection.connect(consult);
     res.json(respuesta);
   }

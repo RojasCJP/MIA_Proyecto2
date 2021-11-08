@@ -1,4 +1,5 @@
 import React from "react";
+import history from "../history/history";
 
 export class Departamento extends React.Component {
     state = {
@@ -23,7 +24,7 @@ export class Departamento extends React.Component {
                                 <h4 className='col'>Coordinador</h4><p className='col'>{element.USERNAME}</p>
                                 <br />
                                 <div>
-                                    <button type='button' className='btn btn-success col-8' onClick={() => { }}>Ver Empleados</button>
+                                    <button type='button' className='btn btn-success col-8' onClick={() => { history.push('/related/' + element.IDEP); }}>Ver Empleados</button>
                                 </div>
                                 <br />
                             </div>

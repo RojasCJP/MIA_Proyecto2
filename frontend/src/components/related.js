@@ -39,6 +39,7 @@ export class Related extends React.Component {
     getUsers() {
         var ruta = 'http://localhost:4000/consult/userFromDep';
         var object = { dep: this.state.dep };
+        console.log(this.state.dep, "state");
         fetch(ruta, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

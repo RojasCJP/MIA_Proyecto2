@@ -142,7 +142,7 @@ class IndexController {
 
   public async allDep(req: Request, res: Response) {
     var consulta =
-      "select nombre, capital_total as capital, Usuario.username from departamento left outer join Usuario on Usuario.id_usuario = Departamento.coordinador";
+      "select id_departamento as idep,nombre, capital_total as capital, Usuario.username from departamento left outer join Usuario on Usuario.id_usuario = Departamento.coordinador";
     var consultDep = await connection.connect(consulta);
     res.json(consultDep);
   }
