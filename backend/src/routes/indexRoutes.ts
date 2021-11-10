@@ -17,6 +17,8 @@ class IndexRoutes {
     this.router.get("/allUsers", indexController.allUsers);
     this.router.get("/allDep", indexController.allDep);
     this.router.post("/searchPuestos", indexController.searchPuestos);
+    this.router.get("/drops", indexController.runDrops);
+    this.router.get("/script", indexController.runScript);
   }
 }
 
